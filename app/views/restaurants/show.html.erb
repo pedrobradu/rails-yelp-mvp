@@ -2,9 +2,15 @@
 <p><%= @restaurant.address %></p>
 <p><%= @restaurant.phone_number %></p>
 <p><%= @restaurant.category %></p>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :rating, collection: (0..5) %>
+  <%= f.input :content %>
+  <%= f.submit "Criar a Review!" %>
+<% end %>
+
 <%@restaurant.reviews.each do |review| %>
     <p><%= "#{review.rating} - #{review.content}" %></p>
 <%end %>
 
 <%= link_to "Voltar para home", restaurants_path() %>
-<%= link_to "Criar uma nova review", new_restaurant_review_path(@restaurant) %>
